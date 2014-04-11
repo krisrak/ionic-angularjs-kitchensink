@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+  <title>Ionic-AngularJS Kitchen Sink</title>
+
+  <link href="http://code.ionicframework.com/1.0.0-beta.1/css/ionic.min.css" rel="stylesheet">
+  <script src="http://code.ionicframework.com/1.0.0-beta.1/js/ionic.bundle.min.js"></script>
+
+  <script src="js/app.js"></script> 
+
+  <style>
+      .box {height:300px;padding: 10px}
+  </style>      
+</head>
+
+<body ng-controller="AppCtrl">
+
+  <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+    
+  <script id="menu.html" type="text/ng-template">
+    <ion-side-menus>
+
+      <ion-side-menu side="left">
+        <ion-header-bar class="bar-positive">
+          <h1 class="title">Side Menu</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ul class="list">
+            <a href="#/menu/tab/buttons" class="item" menu-toggle="left">UI Components</a>
+            <a href="#/menu/keyboard" class="item" menu-toggle="left">Keyboard Input Types</a>
+            <a href="#/menu/slidebox" class="item" menu-toggle="left">Slide Box</a>
+            <a href="#/menu/about" class="item" menu-toggle="left">About</a>
+          </ul>
+        </ion-content>
+      </ion-side-menu>
+
+      <ion-side-menu-content>        
+        <ion-nav-view name="menuContent"></ion-nav-view>
+      </ion-side-menu-content>
+
+    </ion-side-menus>
+  </script>    
+    
+  <script id="tabs.html" type="text/ng-template">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button class="button-icon ion-arrow-left-c">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-compose" ng-click="modal.show()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+        
+    <ion-tabs class="tabs-icon-top tabs-positive">
+
+      <ion-tab title="Buttons" icon="ion-pricetag" href="#/menu/tab/buttons">
+        <ion-nav-view name="buttons-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="List Nav" icon="ion-clipboard" href="#/menu/tab/list">
+        <ion-nav-view name="list-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Form" icon="ion-settings" href="#/menu/tab/form">
+        <ion-nav-view name="form-tab"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>
+  </script>
+
+  <script id="buttons.html" type="text/ng-template">
+    <ion-view title="Buttons">
+      <ion-content class="padding">
+        <p>Example of Ionic buttons, grouped buttons, popup and actionsheet.</p>
+        <p>
+          <a class="button icon icon-left ion-ios7-albums-outline button-assertive" ng-click="showPopup()">Popup</a>
+          <a class="button icon icon-left ion-ios7-upload-outline button-energized" ng-click="showActionsheet()">Action Sheet</a>
+        </p>
+        <p>
+        <button class="button icon ion-gear-a"></button>
+        </p>
+        <p>
+        <button class="button button-outline button-positive">
+          Outlined Button
+        </button>
+        </p>
+        <p>
+        <button class="button button-block button-dark">
+          Block Button
+        </button>
+        </p>
+        <p>
+        <div class="button-bar">
+          <a class="button">First</a>
+          <a class="button">Second</a>
+          <a class="button">Third</a>
+        </div>
+        </p>        
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="item.html" type="text/ng-template">
+    <ion-view title="Item">
+      <ion-content class="padding">
+        <p>Details of Item</p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="list.html" type="text/ng-template">
+    <ion-view title="List Nav">
+      <ion-content>
+        <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
+
+        <div class="list">
+          <div class="item item-divider">
+            Static list
+          </div>  
+          
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-email"></i>
+            Check mail
+          </a>
+
+          <a class="item item-icon-left item-icon-right" href="#/menu/tab/item">
+            <i class="icon ion-chatbubble-working"></i>
+            Call Ma
+            <i class="icon ion-ios7-telephone-outline"></i>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-mic-a"></i>
+            Record album
+            <span class="item-note">
+              Grammy
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-person-stalker"></i>
+            Friends
+            <span class="badge badge-assertive">0</span>
+          </a>
+        
+          <div class="item item-divider">
+            Angularjs list
+          </div>
+               
+          <ion-item ng-repeat="item in items" item="item" href="#/menu/tab/item">
+            Item {{ item.id }}
+          </ion-item>        
+        </div>         
+
+        </ion-list>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="form.html" type="text/ng-template">
+    <ion-view title="Form Elements">
+      <ion-content class="padding">
+        
+        <div class="list">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search">
+          </label>
+        </div>
+        </div>
+        
+        <div class="list">
+          <div class="item item-divider">
+            Other form elements
+          </div>
+        
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #1
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #2
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          
+          <label class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox">
+             </label>
+             Checkbox
+          </label> 
+          
+          <li class="item item-toggle">
+             Toggle
+             <label class="toggle toggle-assertive">
+               <input type="checkbox">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+        
+          <div class="item range range-positive">
+            <i class="icon ion-ios7-sunny-outline"></i>
+            <input type="range" name="volume" min="0" max="100" value="33">
+            <i class="icon ion-ios7-sunny"></i>
+          </div>
+        
+          <div class="item item-input item-select">
+            <div class="input-label">
+              Select
+            </div>
+            <select>
+              <option>Option #1</option>
+              <option selected>Option #2</option>
+              <option>Option #3</option>
+            </select>
+          </div>
+          
+        </div>
+        
+        <br>
+
+      </ion-content>
+    </ion-view>
+  </script>
+    
+  <script id="slidebox.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar class="bar-positive">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+          <h1 class="title">Slide Box</h1>
+      </ion-header-bar>
+      
+      <ion-content>
+        <ion-slide-box>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #1</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #2</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #3</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+       </ion-content>    
+    </ion-view>
+  </script>   
+
+  <script id="keyboard.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+        <h1 class="title">Keyboard Input</h1>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="list">        
+          <label class="item item-divider">
+            Input types for popup keyboard
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Text</span>
+            <input type="text" ng-model="user.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="user.password">
+          </label>          
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Tel</span>
+            <input type="tel">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Number</span>
+            <input type="number">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Date</span>
+            <input type="date">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Month</span>
+            <input type="month">
+          </label> 
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>     
+    
+  <script id="about.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+        <h1 class="title">About</h1>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="card">
+          <div class="item">
+            <h3>Ionic Framework Kitchen Sink</h3>
+            <p>by <a href="http://twitter.com/krisrak" target="_blank">@krisrak</a></p>
+          </div>    
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>    
+
+  <script id="modal.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Modal</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">To</span>
+            <input type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Message</span>
+            <textarea rows="4"></textarea>
+          </label>
+        </div>
+        <button class="button icon icon-right ion-arrow-right-c button-balanced button-block">Send</button>
+      </ion-content>
+    </div>
+  </script>  
+      
+</body>
+</html>
