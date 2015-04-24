@@ -169,11 +169,6 @@ angular.module('ionicApp', ['ionic'])
           }
         });
     };
-    $ionicModal.fromTemplateUrl('modal.html', function (modal) {
-        $scope.modal = modal;
-      }, {
-        animation: 'slide-in-up'
-      });
 })
 
 .controller('SlideboxCtrl', function($scope, $ionicSlideBoxDelegate) {
@@ -182,18 +177,13 @@ angular.module('ionicApp', ['ionic'])
   }             
 })              
 
-.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal) {
-  $scope.toggleLeft = function() {
-    $ionicSideMenuDelegate.toggleLeft();
-  };
-              
+.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal) {              
   $ionicModal.fromTemplateUrl('modal.html', function (modal) {
     $scope.modal = modal;
   }, {
     animation: 'slide-in-up'
   });
  })
-
   
  .controller('AppCtrl', function() {
 
