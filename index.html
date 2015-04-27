@@ -94,8 +94,9 @@
       <ion-content class="padding">
         <p>Example of Ionic buttons, grouped buttons, popup and actionsheet.</p>
         <p>
-          <a class="button icon icon-left ion-ios7-albums-outline button-assertive" ng-click="showPopup()">Popup</a>
-          <a class="button icon icon-left ion-ios7-upload-outline button-energized" ng-click="showActionsheet()">Action Sheet</a>
+          <a class="button icon icon-left button-assertive" ng-click="showPopup()">Popup</a>
+          <a class="button icon icon-left button-energized" ng-click="showActionsheet()">Action Sheet</a>
+          <a class="button icon icon-left button-balanced" ng-click="modal.show()">Modal</a>
         </p>
         <p>
         <button class="button icon ion-gear-a"></button>
@@ -147,7 +148,7 @@
           <a class="item item-icon-left item-icon-right" href="#/menu/tab/item">
             <i class="icon ion-chatbubble-working"></i>
             Call Ma
-            <i class="icon ion-ios7-telephone-outline"></i>
+            <i class="icon ion-ios-telephone-outline"></i>
           </a>
 
           <a class="item item-icon-left" href="#/menu/tab/item">
@@ -171,7 +172,27 @@
           <ion-item ng-repeat="item in items" class="item item-icon-right" href="#/menu/tab/item">
             Item {{ item.id }}
             <i class="icon ion-chevron-right icon-accessory"></i>
-          </ion-item>        
+          </ion-item>  
+
+          <div class="item item-divider">
+            Avatar list item
+          </div>  
+
+          <a class="item item-avatar" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
+          <div class="item item-divider">
+            Thumbnail list item
+          </div>  
+          <a class="item item-thumbnail-left" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
         </div>         
 
         </ion-list>
